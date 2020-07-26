@@ -1,63 +1,57 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Input from "./common/input";
+import Joi from "joi-browser";
+import Form from "./common/form";
 
-class CustomerLoginForm extends Component {
+class CustomerLoginForm extends Form {
   state = {
-    account: { username: "", password: "" }
+    data: { username: "", password: "" },
+    errors: {}
   };
 
-  handleSubmit = async e => {
-    this.props.history.push("/");
+  schema = {
+    username: Joi.string()
+      .required()
+      .label("Username"),
+    password: Joi.string()
+      .required()
+      .label("Password")
+  };
 
-    const { username, password } = this.state.account;
-    e.preventDefault();
-
+  doSubmit = async () => {
     // Call the server
     console.log("Submitted");
 
+    const { username, password } = this.state.data;
     const token = Buffer.from(`${username}:${password}`, "utf8").toString(
       "base64"
     );
     console.log("java", token);
 
-    const response = await axios.get(
-      "http://localhost:8080/customer/1/tickets",
-      {
+    try {
+      const { data } = await axios.get("http://localhost:8080/customer/auth", {
         headers: {
           Authorization: `Basic ${token}`
         }
-      }
-    );
-    console.log("java", response);
-  };
+      });
+      console.log("java", data);
+      localStorage.setItem("id", data.id);
+    } catch (error) {
+      console.log("err: ", error);
+      return (window.location = "/customer/dashboard");
+    }
 
-  handleChange = ({ currentTarget: input }) => {
-    const account = { ...this.state.account };
-    account[input.name] = input.value;
-    this.setState({ account });
+    this.props.history.replace("/customer/dashboard");
   };
 
   render() {
-    const { account } = this.state;
     return (
       <div>
         <h1>Login Form</h1>
         <form onSubmit={this.handleSubmit}>
-          <Input
-            name="username"
-            value={account.username}
-            label="Username"
-            onChange={this.handleChange}
-          />
-          <Input
-            name="password"
-            value={account.password}
-            label="password"
-            onChange={this.handleChange}
-          />
-
-          <button className="btn btn-primary">Login</button>
+          {this.renderInput("username", "Username")}
+          {this.renderInput("password", "Password", "password")}
+          {this.renderButton("login")}
         </form>
       </div>
     );
