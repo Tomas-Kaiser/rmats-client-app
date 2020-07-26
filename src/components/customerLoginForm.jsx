@@ -37,7 +37,7 @@ class CustomerLoginForm extends Form {
       localStorage.setItem("token", JSON.stringify(data));
     } catch (error) {
       console.log("err: ", error);
-      return this.props.history.push("/customer-login");
+      return (window.location = "/customer-login");
     }
     window.location = "/customer/dashboard";
   };
