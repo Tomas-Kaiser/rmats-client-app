@@ -3,7 +3,8 @@ import React, { Component } from "react";
 class CustomerDashboard extends Component {
   state = {};
   render() {
-    return <h1>This is a customer dashboard!</h1>;
+    console.log(this.props.user);
+    return <h2>Hello Customer</h2>;
   }
 }
 

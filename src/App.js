@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import CustomerLoginForm from "./components/customerLoginForm";
+import CustomerLoginForm from "./components/customer/customerLoginForm";
 import AdminLoginForm from "./components/adminLoginForm";
-import CustomerRegistrationForm from "./components/customerRegistrationForm";
 import Home from "./components/home";
-import CustomerDashboard from "./components/customerDashboard";
+import CustomerDashboard from "./components/customer/customerDashboard";
 import Navbar from "./components/navbar";
 import NotFound from "./components/notFound";
+import Logout from "./components/logout";
 import "./App.css";
+import RegistrationForm from "./components/registertaionForm";
 
 class App extends Component {
   state = {};
@@ -26,10 +27,8 @@ class App extends Component {
           <Switch>
             <Route path="/customer-login" component={CustomerLoginForm}></Route>
             <Route path="/admin-login" component={AdminLoginForm}></Route>
-            <Route
-              path="/register"
-              component={CustomerRegistrationForm}
-            ></Route>
+            <Route path="/logout" component={Logout}></Route>
+            <Route path="/register" component={RegistrationForm}></Route>
             <Route
               path="/customer/dashboard"
               component={CustomerDashboard}

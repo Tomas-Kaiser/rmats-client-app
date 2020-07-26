@@ -35,7 +35,7 @@ const Navbar = ({ user }) => {
             <NavLink className="nav-item nav-link" to="/customer/tickets">
               See Tickets
             </NavLink>
-            <NavLink className="nav-item nav-link" to="/customer/logout">
+            <NavLink className="nav-item nav-link" to="/logout">
               Logout
             </NavLink>
           </React.Fragment>
