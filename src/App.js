@@ -13,14 +13,15 @@ class App extends Component {
   state = {};
 
   componentDidMount() {
-    const userId = localStorage.getItem("id");
-    console.log("THis is ID:" + userId);
+    const user = JSON.parse(localStorage.getItem("token"));
+    console.log("User: ", user);
+    this.setState({ user });
   }
 
   render() {
     return (
       <React.Fragment>
-        <Navbar />
+        <Navbar user={this.state.user} />
         <main className="container">
           <Switch>
             <Route path="/customer-login" component={CustomerLoginForm}></Route>

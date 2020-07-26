@@ -34,14 +34,12 @@ class CustomerLoginForm extends Form {
           Authorization: `Basic ${token}`
         }
       });
-      console.log("java", data);
-      localStorage.setItem("id", data.id);
+      localStorage.setItem("token", JSON.stringify(data));
     } catch (error) {
       console.log("err: ", error);
-      return (window.location = "/customer/dashboard");
+      return this.props.history.push("/customer-login");
     }
-
-    this.props.history.replace("/customer/dashboard");
+    window.location = "/customer/dashboard";
   };
 
   render() {
