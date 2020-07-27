@@ -23,7 +23,7 @@ class CustomerTickets extends Component {
     return (
       <React.Fragment>
         <h1>See all tickets</h1>
-        <table class="table table-striped">
+        <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">Ticket Id</th>

@@ -1,7 +1,8 @@
 import React from "react";
-import axios from "axios";
 import Joi from "joi-browser";
 import Form from "../common/form";
+import http from "../../services/httpService";
+import config from "../../config.json";
 
 class CustomerLoginForm extends Form {
   state = {
@@ -19,24 +20,22 @@ class CustomerLoginForm extends Form {
   };
 
   doSubmit = async () => {
-    // Call the server
-    console.log("Submitted");
-
     const { username, password } = this.state.data;
     const token = Buffer.from(`${username}:${password}`, "utf8").toString(
       "base64"
     );
-    console.log("java", token);
 
     try {
-      const { data } = await axios.get("http://localhost:8080/customer/auth", {
+      const { data } = await http.get(config.apiEndpointCustomerLogin, {
         headers: {
           Authorization: `Basic ${token}`
         }
       });
       localStorage.setItem("token", JSON.stringify(data));
-    } catch (error) {
-      console.log("err: ", error);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        alert("This is expected error 404");
+      }
       return (window.location = "/customer-login");
     }
     window.location = "/customer/dashboard";
