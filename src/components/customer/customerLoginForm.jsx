@@ -1,8 +1,9 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 import Joi from "joi-browser";
 import Form from "../common/form";
 import http from "../../services/httpService";
-import config from "../../config.json";
+import { apiUrl } from "../../config.json";
 
 class CustomerLoginForm extends Form {
   state = {
@@ -26,7 +27,7 @@ class CustomerLoginForm extends Form {
     );
 
     try {
-      const { data } = await http.get(config.apiEndpointCustomerLogin, {
+      const { data } = await http.get(apiUrl + "/customer/auth", {
         headers: {
           Authorization: `Basic ${token}`
         }
@@ -36,7 +37,8 @@ class CustomerLoginForm extends Form {
       if (ex.response && ex.response.status === 404) {
         alert("This is expected error 404");
       }
-      return (window.location = "/customer-login");
+      //return (window.location = "/customer-login");
+      return;
     }
     window.location = "/customer/dashboard";
   };
@@ -44,6 +46,7 @@ class CustomerLoginForm extends Form {
   render() {
     return (
       <div>
+        <ToastContainer />
         <h1>Login Form</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}

@@ -4,11 +4,14 @@ import CustomerLoginForm from "./components/customer/customerLoginForm";
 import AdminLoginForm from "./components/adminLoginForm";
 import Home from "./components/home";
 import CustomerDashboard from "./components/customer/customerDashboard";
+import CustomerTickets from "./components/customer/customerTickets";
 import Navbar from "./components/navbar";
 import NotFound from "./components/notFound";
 import Logout from "./components/logout";
-import "./App.css";
 import RegistrationForm from "./components/registertaionForm";
+import TicketForm from "./components/ticketForm";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 class App extends Component {
   state = {};
@@ -33,6 +36,8 @@ class App extends Component {
               path="/customer/dashboard"
               component={CustomerDashboard}
             ></Route>
+            <Route path="/customer/tickets/new" component={TicketForm}></Route>
+            <Route path="/customer/tickets" component={CustomerTickets}></Route>
             <Route path="/not-found" component={NotFound}></Route>
             <Route path="/" exact component={Home}></Route>
             <Redirect to="/not-found" />

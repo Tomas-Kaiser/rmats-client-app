@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import http from "../../services/httpService";
 
 class CustomerTickets extends Component {
   state = {
@@ -9,7 +10,7 @@ class CustomerTickets extends Component {
   async componentDidMount() {
     const token = Buffer.from(`kosak@c.cz:kosak`, "utf8").toString("base64");
 
-    const { data: tickets } = await axios.get(
+    const { data: tickets } = await http.get(
       "http://localhost:8080/customers/1/tickets",
       {
         headers: {

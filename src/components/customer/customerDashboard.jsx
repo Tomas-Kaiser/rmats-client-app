@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CustomerTickets from "./customerTickets";
 
 class CustomerDashboard extends Component {
   state = {};
@@ -7,9 +6,8 @@ class CustomerDashboard extends Component {
     console.log(this.props.user);
     return (
       <React.Fragment>
-        <h2>Hello Customer</h2>
-        <h3>See Tickets:</h3>
-        <CustomerTickets />
+        <h2>Hello Customer [name]</h2>
+        <h3>Some data about your account:</h3>
       </React.Fragment>
     );
   }
