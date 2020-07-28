@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import http from "../services/httpService";
-import { apiUrl } from "../config.json";
 import { saveTicket } from "../services/ticketService";
+import { saveFaultyUnit } from "../services/faultyService";
 
 class TicketForm extends Form {
   state = {
@@ -28,44 +27,17 @@ class TicketForm extends Form {
   };
 
   doSubmit = async () => {
-    const user = JSON.parse(localStorage.getItem("token"));
-    const token = Buffer.from(`kosak@c.cz:kosak`, "utf8").toString("base64");
+    const { user } = this.props;
+    const { data } = this.state;
 
     // Creating a ticket
     try {
-      const options = {
-        headers: {
-          Authorization: `Basic ${token}`
-        }
-      };
-
-      const { data: ticket } = await saveTicket(
-        this.props.user,
-        this.state.data
-      );
-      /*
-      const { data: ticket } = await http.post(
-        apiUrl + `/customers/${user.id}/ticket`,
-        { custComment: this.state.data.custComment },
-        options
-      );
-      */
-      console.log("Data from craeting ticket:", { ticket });
+      const { data: ticket } = await saveTicket(user, data);
 
       // Creating a fault unit
       try {
-        const obj = {
-          model: this.state.data.model,
-          serialNumber: this.state.data.serialNumber,
-          ticketId: ticket.id
-        };
-
-        const { data: faulty } = await http.post(
-          apiUrl + `/customers/${user.id}/tickets/${ticket.id}/faulty`,
-          obj,
-          options
-        );
-        console.log("Faulty unit: ", faulty);
+        const { data: faulty } = await saveFaultyUnit(user, data, ticket);
+        window.location = "/customer/tickets";
       } catch (error) {}
     } catch (error) {}
   };
