@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
+import { saveTicket } from "../services/ticketService";
 
 class TicketForm extends Form {
   state = {
@@ -38,11 +39,17 @@ class TicketForm extends Form {
         }
       };
 
+      const { data: ticket } = await saveTicket(
+        this.props.user,
+        this.state.data
+      );
+      /*
       const { data: ticket } = await http.post(
         apiUrl + `/customers/${user.id}/ticket`,
         { custComment: this.state.data.custComment },
         options
       );
+      */
       console.log("Data from craeting ticket:", { ticket });
 
       // Creating a fault unit

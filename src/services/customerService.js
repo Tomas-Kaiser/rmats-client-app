@@ -1,5 +1,6 @@
 import http from "./httpService";
 import { apiUrl } from "../config.json";
+import { getToken } from "./authService";
 
 const apiEndpoint = apiUrl + "/customer";
 
@@ -15,9 +16,8 @@ export function register(customer) {
 }
 
 export function getTickets(customer) {
-  console.log("This service passed user: ", customer);
   const { id, email, pwd: password } = customer;
-  const token = Buffer.from(`${email}:${password}`, "utf8").toString("base64");
+  const token = getToken(email, password);
 
   return http.get(`${apiEndpoint}s/${id}/tickets`, {
     headers: {
