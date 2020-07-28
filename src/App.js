@@ -34,8 +34,11 @@ class App extends Component {
             <Route path="/register" component={RegistrationForm}></Route>
             <Route
               path="/customer/dashboard"
-              component={CustomerDashboard}
-            ></Route>
+              render={props => {
+                if (!this.state.user) return <Redirect to="/customer-login" />;
+                return <CustomerDashboard {...props} />;
+              }}
+            />
             <Route path="/customer/ticket/new" component={TicketForm}></Route>
             <Route path="/customer/tickets" component={CustomerTickets}></Route>
             <Route path="/not-found" component={NotFound}></Route>

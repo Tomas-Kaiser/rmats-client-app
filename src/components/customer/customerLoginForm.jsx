@@ -22,12 +22,10 @@ class CustomerLoginForm extends Form {
   };
 
   doSubmit = async () => {
-    console.log("Login");
     const { username, password } = this.state.data;
 
     try {
       const { data } = await auth(username, password);
-      console.log("DATAAAA: ", data);
       localStorage.setItem("token", JSON.stringify(data));
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
