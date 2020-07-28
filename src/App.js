@@ -10,6 +10,7 @@ import NotFound from "./components/notFound";
 import Logout from "./components/logout";
 import RegistrationForm from "./components/registertaionForm";
 import TicketForm from "./components/ticketForm";
+import TicketDetails from "./components/ticketDetails";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -67,6 +68,15 @@ class App extends Component {
                   return <Redirect to="/customer-login" />;
                 }
                 return <CustomerTickets {...props} user={user} />;
+              }}
+            />
+            <Route
+              path="/customer/ticket/:id"
+              render={props => {
+                if (!user) {
+                  return <Redirect to="/customer-login" />;
+                }
+                return <TicketDetails {...props} user={user} />;
               }}
             />
             <Route path="/not-found" component={NotFound}></Route>

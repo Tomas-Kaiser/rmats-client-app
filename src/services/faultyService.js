@@ -22,3 +22,15 @@ export function saveFaultyUnit(customer, data, ticket) {
     }
   );
 }
+
+export function getFaultyUnit(customer, ticketId) {
+  const { id, email, pwd: password } = customer;
+  console.log("id?", id);
+  const token = getToken(email, password);
+
+  return http.get(`${apiEndpoint}s/${id}/tickets/${ticketId}/faulty`, {
+    headers: {
+      Authorization: `Basic ${token}`
+    }
+  });
+}

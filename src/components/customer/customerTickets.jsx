@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import http from "../../services/httpService";
+import { Link } from "react-router-dom";
 import { getTickets } from "../../services/customerService";
 
 class CustomerTickets extends Component {
@@ -23,6 +23,7 @@ class CustomerTickets extends Component {
               <th scope="col">Ticket Id</th>
               <th scope="col">Date</th>
               <th scope="col">Comment</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -31,6 +32,14 @@ class CustomerTickets extends Component {
                 <th scope="row">{ticket.id}</th>
                 <td>{ticket.raiseDate}</td>
                 <td>{ticket.comment}</td>
+                <td>
+                  <Link
+                    to={`/customer/ticket/${ticket.id}`}
+                    className="btn btn-primary"
+                  >
+                    Detail
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
