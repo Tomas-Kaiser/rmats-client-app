@@ -22,10 +22,10 @@ export function saveTicket(customer, data) {
 }
 
 export function getTicketsByCustomer(customer) {
-  const { id, email, pwd: password } = customer;
+  const { id: customerId, email, pwd: password } = customer;
   const token = getToken(email, password);
 
-  return http.get(`${apiEndpoint}s/${id}/tickets`, {
+  return http.get(`${apiEndpoint}s/${customerId}/tickets`, {
     headers: {
       Authorization: `Basic ${token}`
     }

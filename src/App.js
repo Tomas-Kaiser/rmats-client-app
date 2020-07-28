@@ -55,7 +55,7 @@ class App extends Component {
             <Route
               path="/customer/ticket/new"
               render={props => {
-                if (!user) {
+                if (!user || user.isAdmin) {
                   return <Redirect to="/login" />;
                 }
                 return <TicketForm {...props} user={user} />;
@@ -64,7 +64,7 @@ class App extends Component {
             <Route
               path="/customer/tickets"
               render={props => {
-                if (!user) {
+                if (!user || user.isAdmin) {
                   return <Redirect to="/login" />;
                 }
                 return <CustomerTickets {...props} user={user} />;
@@ -73,7 +73,7 @@ class App extends Component {
             <Route
               path="/admin/tickets"
               render={props => {
-                if (!user) {
+                if (!user || !user.isAdmin) {
                   return <Redirect to="/login" />;
                 }
                 return <AdminTickets {...props} user={user} />;
@@ -82,7 +82,7 @@ class App extends Component {
             <Route
               path="/customer/ticket/:id"
               render={props => {
-                if (!user) {
+                if (!user || user.isAdmin) {
                   return <Redirect to="/login" />;
                 }
                 return <TicketDetails {...props} user={user} />;
