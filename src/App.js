@@ -36,7 +36,7 @@ class App extends Component {
               path="/customer/dashboard"
               component={CustomerDashboard}
             ></Route>
-            <Route path="/customer/tickets/new" component={TicketForm}></Route>
+            <Route path="/customer/ticket/new" component={TicketForm}></Route>
             <Route path="/customer/tickets" component={CustomerTickets}></Route>
             <Route path="/not-found" component={NotFound}></Route>
             <Route path="/" exact component={Home}></Route>

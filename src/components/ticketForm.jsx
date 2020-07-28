@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import http from "../services/httpService";
@@ -8,23 +7,23 @@ import { apiUrl } from "../config.json";
 class TicketForm extends Form {
   state = {
     data: {
-      custComment: "",
       model: "",
-      serialNumber: ""
+      serialNumber: "",
+      custComment: ""
     },
     errors: {}
   };
 
   schema = {
-    custComment: Joi.string()
-      .required()
-      .label("Comment"),
     model: Joi.string()
       .required()
       .label("Model"),
     serialNumber: Joi.string()
       .required()
-      .label("Serial Number")
+      .label("Serial Number"),
+    custComment: Joi.string()
+      .required()
+      .label("Comment")
   };
 
   doSubmit = async () => {

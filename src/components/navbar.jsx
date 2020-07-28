@@ -29,7 +29,7 @@ const Navbar = ({ user }) => {
             <NavLink className="nav-item nav-link" to="/customer/dashboard">
               Dashboard
             </NavLink>
-            <NavLink className="nav-item nav-link" to="/customer/tickets/new">
+            <NavLink className="nav-item nav-link" to="/customer/ticket/new">
               Create Ticket
             </NavLink>
             <NavLink className="nav-item nav-link" to="/customer/tickets">

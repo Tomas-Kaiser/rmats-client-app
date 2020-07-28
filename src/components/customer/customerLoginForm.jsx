@@ -4,6 +4,7 @@ import Joi from "joi-browser";
 import Form from "../common/form";
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
+import { auth } from "../../services/authService";
 
 class CustomerLoginForm extends Form {
   state = {
@@ -21,25 +22,20 @@ class CustomerLoginForm extends Form {
   };
 
   doSubmit = async () => {
+    console.log("Login");
     const { username, password } = this.state.data;
-    const token = Buffer.from(`${username}:${password}`, "utf8").toString(
-      "base64"
-    );
 
     try {
-      const { data } = await http.get(apiUrl + "/customer/auth", {
-        headers: {
-          Authorization: `Basic ${token}`
-        }
-      });
+      const { data } = await auth(username, password);
+      console.log("DATAAAA: ", data);
       localStorage.setItem("token", JSON.stringify(data));
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         alert("This is expected error 404");
+        //return (window.location = "/customer-login");
       }
-      //return (window.location = "/customer-login");
-      return;
     }
+
     window.location = "/customer/dashboard";
   };
 

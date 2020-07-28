@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import { register } from "../services/customerService";
 
 class RegistrationForm extends Form {
   state = {
@@ -39,26 +40,14 @@ class RegistrationForm extends Form {
   };
 
   doSubmit = async () => {
-    console.log("Calling the server!");
-    // call the server
-    const { data } = this.state;
-    console.log("First name is: ", data);
-    const obj = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phone: data.phone,
-      company: data.company,
-      email: data.email,
-      password: data.password
-    };
-
     try {
-      const newCustomer = await axios.post(
-        "http://localhost:8080/customer",
-        obj
-      );
-      console.log("New customer created: ", newCustomer);
+      await register(this.state.data);
     } catch (error) {
+      if (error.response && error.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.email = error.response.data;
+        this.setState({ errors });
+      }
       console.log("err: ", error);
       return;
     }

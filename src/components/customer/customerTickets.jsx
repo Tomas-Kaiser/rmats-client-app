@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import http from "../../services/httpService";
 
 class CustomerTickets extends Component {
