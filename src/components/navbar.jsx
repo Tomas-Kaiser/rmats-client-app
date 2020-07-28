@@ -11,7 +11,7 @@ const Navbar = ({ user }) => {
         {!user && (
           <React.Fragment>
             <NavLink className="nav-item nav-link" to="/login">
-              Customer Login
+              Login
             </NavLink>
             <NavLink className="nav-item nav-link" to="/register">
               register
