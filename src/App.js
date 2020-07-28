@@ -38,7 +38,7 @@ class App extends Component {
         <Navbar user={user} />
         <main className="container">
           <Switch>
-            <Route path="/customer-login" component={CustomerLoginForm}></Route>
+            <Route path="/login" component={CustomerLoginForm}></Route>
             <Route path="/logout" component={Logout}></Route>
             <Route path="/register" component={RegistrationForm}></Route>
             <Route

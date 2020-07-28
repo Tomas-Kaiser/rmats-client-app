@@ -10,7 +10,7 @@ const Navbar = ({ user }) => {
       <ul className="navbar-nav mr-auto">
         {!user && (
           <React.Fragment>
-            <NavLink className="nav-item nav-link" to="/customer-login">
+            <NavLink className="nav-item nav-link" to="/login">
               Customer Login
             </NavLink>
             <NavLink className="nav-item nav-link" to="/register">
