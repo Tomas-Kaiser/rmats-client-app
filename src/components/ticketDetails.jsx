@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { getFaultyUnit } from "../services/faultyService";
 import { getReplacementUnit } from "../services/replacementService";
 
-class fDetails extends Component {
+class faultyDetails extends Component {
   state = {
     faulty: [],
     replacement: []
@@ -82,4 +82,4 @@ class fDetails extends Component {
   }
 }
 
-export default fDetails;
+export default faultyDetails;
