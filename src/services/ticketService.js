@@ -31,3 +31,14 @@ export function getTicketsByCustomer(customer) {
     }
   });
 }
+
+export function getAllTickets(admin) {
+  const { email, pwd: password } = admin;
+  const token = getToken(email, password);
+
+  return http.get(`${apiUrl}/admin/tickets`, {
+    headers: {
+      Authorization: `Basic ${token}`
+    }
+  });
+}
