@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import CustomerLoginForm from "./components/customer/customerLoginForm";
+import LoginForm from "./components/loginForm";
 import Home from "./components/home";
 import CustomerDashboard from "./components/customer/customerDashboard";
 import CustomerTickets from "./components/customer/customerTickets";
@@ -38,7 +38,7 @@ class App extends Component {
         <Navbar user={user} />
         <main className="container">
           <Switch>
-            <Route path="/login" component={CustomerLoginForm}></Route>
+            <Route path="/login" component={LoginForm}></Route>
             <Route path="/logout" component={Logout}></Route>
             <Route path="/register" component={RegistrationForm}></Route>
             <Route
