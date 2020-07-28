@@ -13,9 +13,6 @@ const Navbar = ({ user }) => {
             <NavLink className="nav-item nav-link" to="/customer-login">
               Customer Login
             </NavLink>
-            <NavLink className="nav-link" to="/admin-login">
-              Admin Login
-            </NavLink>
             <NavLink className="nav-item nav-link" to="/register">
               register
             </NavLink>
