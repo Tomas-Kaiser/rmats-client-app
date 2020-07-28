@@ -21,7 +21,7 @@ const Navbar = ({ user }) => {
             </NavLink>
           </React.Fragment>
         )}
-        {user && (
+        {user && !user.isAdmin && (
           <React.Fragment>
             <NavLink className="nav-item nav-link" to="/profile">
               {user.firstName}
@@ -33,6 +33,22 @@ const Navbar = ({ user }) => {
               Create Ticket
             </NavLink>
             <NavLink className="nav-item nav-link" to="/customer/tickets">
+              See Tickets
+            </NavLink>
+            <NavLink className="nav-item nav-link" to="/logout">
+              Logout
+            </NavLink>
+          </React.Fragment>
+        )}
+        {user && user.isAdmin && (
+          <React.Fragment>
+            <NavLink className="nav-item nav-link" to="/profile">
+              {user.firstName}
+            </NavLink>
+            <NavLink className="nav-item nav-link" to="/admin/dashboard">
+              Dashboard
+            </NavLink>
+            <NavLink className="nav-item nav-link" to="/admin/tickets">
               See Tickets
             </NavLink>
             <NavLink className="nav-item nav-link" to="/logout">
