@@ -20,3 +20,14 @@ export function saveTicket(customer, data) {
     }
   );
 }
+
+export function getTicketsByCustomer(customer) {
+  const { id, email, pwd: password } = customer;
+  const token = getToken(email, password);
+
+  return http.get(`${apiEndpoint}s/${id}/tickets`, {
+    headers: {
+      Authorization: `Basic ${token}`
+    }
+  });
+}

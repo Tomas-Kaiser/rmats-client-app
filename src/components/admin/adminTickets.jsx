@@ -1,18 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getTicketsByCustomer } from "../../services/ticketService";
+import { getTickets } from "../../services/customerService";
 
-class CustomerTickets extends Component {
-  state = {
-    tickets: []
-  };
-
-  async componentDidMount() {
-    try {
-      const { data: tickets } = await getTicketsByCustomer(this.props.user);
-      this.setState({ tickets });
-    } catch (error) {}
-  }
+class AdminTickets extends Component {
+  state = {};
   render() {
     return (
       <React.Fragment>
@@ -22,11 +13,12 @@ class CustomerTickets extends Component {
             <tr>
               <th scope="col">Ticket Id</th>
               <th scope="col">Date</th>
-              <th scope="col">Comment</th>
+              <th scope="col">Customer Comment</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
+            {/** 
             {this.state.tickets.map(ticket => (
               <tr key={ticket.id}>
                 <th scope="row">{ticket.id}</th>
@@ -41,7 +33,7 @@ class CustomerTickets extends Component {
                   </Link>
                 </td>
               </tr>
-            ))}
+            ))}*/}
           </tbody>
         </table>
       </React.Fragment>
@@ -49,4 +41,4 @@ class CustomerTickets extends Component {
   }
 }
 
-export default CustomerTickets;
+export default AdminTickets;
