@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class CustomerDashboard extends Component {
+class Dashboard extends Component {
   state = {};
   render() {
     console.log(this.props.user);
@@ -13,4 +13,4 @@ class CustomerDashboard extends Component {
   }
 }
 
-export default CustomerDashboard;
+export default Dashboard;

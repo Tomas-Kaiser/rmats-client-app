@@ -33,7 +33,7 @@ class LoginForm extends Form {
       }
     }
 
-    window.location = "/customer/dashboard";
+    window.location = "/dashboard";
   };
 
   render() {

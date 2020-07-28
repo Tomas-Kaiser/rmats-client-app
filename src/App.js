@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from "./components/loginForm";
 import Home from "./components/home";
-import CustomerDashboard from "./components/customer/customerDashboard";
+import Dashboard from "./components/dashboard";
 import CustomerTickets from "./components/customer/customerTickets";
 import Navbar from "./components/navbar";
 import NotFound from "./components/notFound";
@@ -42,20 +42,20 @@ class App extends Component {
             <Route path="/logout" component={Logout}></Route>
             <Route path="/register" component={RegistrationForm}></Route>
             <Route
-              path="/customer/dashboard"
+              path="/dashboard"
               render={props => {
                 if (!user) {
                   console.log("is user?", user);
-                  return <Redirect to="/customer-login" />;
+                  return <Redirect to="/login" />;
                 }
-                return <CustomerDashboard {...props} user={user} />;
+                return <Dashboard {...props} user={user} />;
               }}
             />
             <Route
               path="/customer/ticket/new"
               render={props => {
                 if (!user) {
-                  return <Redirect to="/customer-login" />;
+                  return <Redirect to="/login" />;
                 }
                 return <TicketForm {...props} user={user} />;
               }}
@@ -64,7 +64,7 @@ class App extends Component {
               path="/customer/tickets"
               render={props => {
                 if (!user) {
-                  return <Redirect to="/customer-login" />;
+                  return <Redirect to="/login" />;
                 }
                 return <CustomerTickets {...props} user={user} />;
               }}
@@ -73,7 +73,7 @@ class App extends Component {
               path="/customer/ticket/:id"
               render={props => {
                 if (!user) {
-                  return <Redirect to="/customer-login" />;
+                  return <Redirect to="/login" />;
                 }
                 return <TicketDetails {...props} user={user} />;
               }}

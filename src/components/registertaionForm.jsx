@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import { register } from "../services/customerService";

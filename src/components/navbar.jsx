@@ -18,36 +18,41 @@ const Navbar = ({ user }) => {
             </NavLink>
           </React.Fragment>
         )}
-        {user && !user.isAdmin && (
+        {/* Profile & Dashboard tab */}
+        {user && (
           <React.Fragment>
             <NavLink className="nav-item nav-link" to="/profile">
               {user.firstName}
             </NavLink>
-            <NavLink className="nav-item nav-link" to="/customer/dashboard">
+            <NavLink className="nav-item nav-link" to="/dashboard">
               Dashboard
             </NavLink>
+          </React.Fragment>
+        )}
+        {/* Shown specific tabs for customer role */}
+        {user && !user.isAdmin && (
+          <React.Fragment>
             <NavLink className="nav-item nav-link" to="/customer/ticket/new">
               Create Ticket
             </NavLink>
             <NavLink className="nav-item nav-link" to="/customer/tickets">
               See Tickets
             </NavLink>
-            <NavLink className="nav-item nav-link" to="/logout">
-              Logout
-            </NavLink>
           </React.Fragment>
         )}
+
+        {/* Shown specific tabs for admin role */}
         {user && user.isAdmin && (
           <React.Fragment>
-            <NavLink className="nav-item nav-link" to="/profile">
-              {user.firstName}
-            </NavLink>
-            <NavLink className="nav-item nav-link" to="/admin/dashboard">
-              Dashboard
-            </NavLink>
             <NavLink className="nav-item nav-link" to="/admin/tickets">
               See Tickets
             </NavLink>
+          </React.Fragment>
+        )}
+
+        {/* Logout tab */}
+        {user && (
+          <React.Fragment>
             <NavLink className="nav-item nav-link" to="/logout">
               Logout
             </NavLink>
