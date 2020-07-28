@@ -6,7 +6,7 @@ class CustomerDashboard extends Component {
     console.log(this.props.user);
     return (
       <React.Fragment>
-        <h2>Hello Customer [name]</h2>
+        <h2>Hello {this.props.user.firstName}</h2>
         <h3>Some data about your account:</h3>
       </React.Fragment>
     );

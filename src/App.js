@@ -14,18 +14,27 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
-  state = {};
+  state = {
+    user: {}
+  };
+
+  constructor() {
+    super();
+    const user = JSON.parse(localStorage.getItem("token"));
+    this.state.user = user;
+  }
 
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem("token"));
-    console.log("User: ", user);
     this.setState({ user });
   }
 
   render() {
+    const { user } = this.state;
+
     return (
       <React.Fragment>
-        <Navbar user={this.state.user} />
+        <Navbar user={user} />
         <main className="container">
           <Switch>
             <Route path="/customer-login" component={CustomerLoginForm}></Route>
@@ -35,8 +44,11 @@ class App extends Component {
             <Route
               path="/customer/dashboard"
               render={props => {
-                if (!this.state.user) return <Redirect to="/customer-login" />;
-                return <CustomerDashboard {...props} />;
+                if (!user) {
+                  console.log("is user?", user);
+                  return <Redirect to="/customer-login" />;
+                }
+                return <CustomerDashboard {...props} user={user} />;
               }}
             />
             <Route path="/customer/ticket/new" component={TicketForm}></Route>
