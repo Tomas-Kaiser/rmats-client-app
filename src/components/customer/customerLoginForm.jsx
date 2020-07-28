@@ -25,7 +25,8 @@ class CustomerLoginForm extends Form {
     const { username, password } = this.state.data;
 
     try {
-      const { data } = await auth(username, password);
+      let { data } = await auth(username, password);
+      data = { ...data, pwd: password };
       localStorage.setItem("token", JSON.stringify(data));
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {

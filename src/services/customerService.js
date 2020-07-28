@@ -13,3 +13,15 @@ export function register(customer) {
     password: customer.password
   });
 }
+
+export function getTickets(customer) {
+  console.log("This service passed user: ", customer);
+  const { id, email, pwd: password } = customer;
+  const token = Buffer.from(`${email}:${password}`, "utf8").toString("base64");
+
+  return http.get(`${apiEndpoint}s/${id}/tickets`, {
+    headers: {
+      Authorization: `Basic ${token}`
+    }
+  });
+}

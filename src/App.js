@@ -52,7 +52,16 @@ class App extends Component {
               }}
             />
             <Route path="/customer/ticket/new" component={TicketForm}></Route>
-            <Route path="/customer/tickets" component={CustomerTickets}></Route>
+            <Route
+              path="/customer/tickets"
+              render={props => {
+                if (!user) {
+                  console.log("is user?", user);
+                  return <Redirect to="/customer-login" />;
+                }
+                return <CustomerTickets {...props} user={user} />;
+              }}
+            />
             <Route path="/not-found" component={NotFound}></Route>
             <Route path="/" exact component={Home}></Route>
             <Redirect to="/not-found" />

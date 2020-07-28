@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import http from "../../services/httpService";
+import { getTickets } from "../../services/customerService";
 
 class CustomerTickets extends Component {
   state = {
@@ -7,17 +8,10 @@ class CustomerTickets extends Component {
   };
 
   async componentDidMount() {
-    const token = Buffer.from(`kosak@c.cz:kosak`, "utf8").toString("base64");
-
-    const { data: tickets } = await http.get(
-      "http://localhost:8080/customers/1/tickets",
-      {
-        headers: {
-          Authorization: `Basic ${token}`
-        }
-      }
-    );
-    this.setState({ tickets });
+    try {
+      const { data: tickets } = await getTickets(this.props.user);
+      this.setState({ tickets });
+    } catch (error) {}
   }
   render() {
     return (
