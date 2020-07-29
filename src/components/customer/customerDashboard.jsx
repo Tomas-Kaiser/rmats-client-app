@@ -32,7 +32,10 @@ class CustomerDashboard extends Component {
                   <p className="card-text">
                     Do not worry, you can add your current address here.
                   </p>
-                  <Link to="/customer/address" className="btn btn-secondary">
+                  <Link
+                    to="/customer/address/new"
+                    className="btn btn-secondary"
+                  >
                     Add Address
                   </Link>
                 </div>
@@ -58,7 +61,7 @@ class CustomerDashboard extends Component {
                   <p className="card-text">
                     You can check your current address.
                   </p>
-                  <Link to="/customer/tickets" className="btn btn-secondary">
+                  <Link to="/customer/address" className="btn btn-secondary">
                     Your Address
                   </Link>
                 </div>

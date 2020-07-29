@@ -23,3 +23,14 @@ export function saveAddress(customer, data) {
     }
   );
 }
+
+export function getAllAddresses(customer) {
+  const { id: customerId, email, pwd: password } = customer;
+  const token = getToken(email, password);
+
+  return http.get(`${apiEndpoint}s/${customerId}/address`, {
+    headers: {
+      Authorization: `Basic ${token}`
+    }
+  });
+}
