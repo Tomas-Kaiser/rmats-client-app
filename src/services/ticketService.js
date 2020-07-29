@@ -25,7 +25,7 @@ export function getTicketsByCustomer(customer) {
   const { id: customerId, email, pwd: password } = customer;
   const token = getToken(email, password);
 
-  return http.get(`${apiEndpoint}s/${customerId}/tickets`, {
+  return http.get(`${apiUrl}/${customerId}/tickets`, {
     headers: {
       Authorization: `Basic ${token}`
     }
@@ -36,7 +36,7 @@ export function getAllTickets(admin) {
   const { email, pwd: password } = admin;
   const token = getToken(email, password);
 
-  return http.get(`${apiUrl}/admin/tickets`, {
+  return http.get(`${apiUrl}/tickets`, {
     headers: {
       Authorization: `Basic ${token}`
     }
