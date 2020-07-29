@@ -30,7 +30,7 @@ class AddressForm extends Form {
     const { data } = this.state;
 
     try {
-      await saveAddress(user, this.state.data);
+      await saveAddress(user, data);
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         alert("This is expected error 404");
