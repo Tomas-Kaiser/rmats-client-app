@@ -33,10 +33,7 @@ class AdminTickets extends Component {
                 <td>{ticket.raiseDate}</td>
                 <td>{ticket.comment}</td>
                 <td>
-                  <Link
-                    to={`/customer/ticket/${ticket.id}`}
-                    className="btn btn-primary"
-                  >
+                  <Link to={`/ticket/${ticket.id}`} className="btn btn-primary">
                     Detail
                   </Link>
                 </td>

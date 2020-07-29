@@ -80,9 +80,9 @@ class App extends Component {
               }}
             />
             <Route
-              path="/customer/ticket/:id"
+              path="/ticket/:id"
               render={props => {
-                if (!user || user.isAdmin) {
+                if (!user) {
                   return <Redirect to="/login" />;
                 }
                 return <TicketDetails {...props} user={user} />;
