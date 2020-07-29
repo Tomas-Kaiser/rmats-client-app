@@ -23,9 +23,6 @@ class Address extends Component {
     const addresses = originalAddresses.filter(a => a.id !== address.id);
     this.setState({ addresses });
 
-    console.log("Address Deleted");
-    console.log(address);
-
     try {
       await deleteAddressById(this.props.user, address.id);
     } catch (error) {
