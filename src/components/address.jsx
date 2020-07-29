@@ -29,10 +29,11 @@ class Address extends Component {
               className="card mb-5 mr-4"
               style={{ width: "18rem" }}
             >
-              <div className="card-header">
+              <div className="card-header text-right font-weight-bold">
                 Address #{address.id}{" "}
                 <span
                   className="ml-5 text-danger font-weight-bold"
+                  style={{ cursor: "pointer" }}
                   onClick={this.handleDelete}
                 >
                   X
