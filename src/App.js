@@ -12,6 +12,7 @@ import TicketForm from "./components/ticketForm";
 import TicketDetails from "./components/ticketDetails";
 import AdminTickets from "./components/admin/adminTickets";
 import ReplacementForm from "./components/ReplacementForm";
+import AddressForm from "./components/addressForm";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -69,6 +70,15 @@ class App extends Component {
                   return <Redirect to="/login" />;
                 }
                 return <CustomerTickets {...props} user={user} />;
+              }}
+            />
+            <Route
+              path="/customer/address"
+              render={props => {
+                if (!user || user.isAdmin) {
+                  return <Redirect to="/login" />;
+                }
+                return <AddressForm {...props} user={user} />;
               }}
             />
             <Route
