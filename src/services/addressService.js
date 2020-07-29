@@ -34,3 +34,14 @@ export function getAllAddresses(customer) {
     }
   });
 }
+
+export function deleteAddressById(customer, addressId) {
+  const { id: customerId, email, pwd: password } = customer;
+  const token = getToken(email, password);
+
+  return http.delete(`${apiEndpoint}s/${customerId}/address/${addressId}`, {
+    headers: {
+      Authorization: `Basic ${token}`
+    }
+  });
+}
