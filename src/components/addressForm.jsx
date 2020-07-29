@@ -27,13 +27,11 @@ class AddressForm extends Form {
 
   doSubmit = async () => {
     const { user } = this.props;
-    console.log("Uuuser:", user);
+    const { data } = this.state;
 
     try {
       await saveAddress(user, this.state.data);
-      console.log("Address saved");
     } catch (ex) {
-      console.log(ex);
       if (ex.response && ex.response.status === 404) {
         alert("This is expected error 404");
       }
