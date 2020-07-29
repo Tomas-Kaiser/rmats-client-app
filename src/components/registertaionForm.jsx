@@ -51,7 +51,7 @@ class RegistrationForm extends Form {
       return;
     }
 
-    window.location = "/customer-login";
+    window.location = "/login";
   };
 
   render() {

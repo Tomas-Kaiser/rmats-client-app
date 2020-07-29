@@ -11,6 +11,7 @@ import RegistrationForm from "./components/registertaionForm";
 import TicketForm from "./components/ticketForm";
 import TicketDetails from "./components/ticketDetails";
 import AdminTickets from "./components/admin/adminTickets";
+import ReplacementForm from "./components/ReplacementForm";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -71,6 +72,15 @@ class App extends Component {
               }}
             />
             <Route
+              path="/ticket/:ticketId/replacement/:replacementId"
+              render={props => {
+                if (!user && user.isAdmin) {
+                  return <Redirect to="/login" />;
+                }
+                return <ReplacementForm {...props} user={user} />;
+              }}
+            />
+            <Route
               path="/admin/tickets"
               render={props => {
                 if (!user || !user.isAdmin) {
@@ -80,7 +90,7 @@ class App extends Component {
               }}
             />
             <Route
-              path="/ticket/:id"
+              path="/ticket/:ticketId"
               render={props => {
                 if (!user) {
                   return <Redirect to="/login" />;

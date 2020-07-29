@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getFaultyUnit } from "../services/faultyService";
-import { getReplacementUnit } from "../services/replacementService";
+import { getReplacementUnitByTicketId } from "../services/replacementService";
+import { Link } from "react-router-dom";
 
 class faultyDetails extends Component {
   state = {
@@ -12,7 +13,7 @@ class faultyDetails extends Component {
     const { user, match } = this.props;
     // Getting the information about the faulty unit
     try {
-      const { data: faulty } = await getFaultyUnit(user, match.params.id);
+      const { data: faulty } = await getFaultyUnit(user, match.params.ticketId);
       this.setState({ faulty });
     } catch (error) {
       console.log(error);
@@ -20,9 +21,9 @@ class faultyDetails extends Component {
 
     // Getting the information about the replacement unit
     try {
-      const { data: replacement } = await getReplacementUnit(
+      const { data: replacement } = await getReplacementUnitByTicketId(
         user,
-        match.params.id
+        match.params.ticketId
       );
       this.setState({ replacement });
     } catch (error) {
@@ -31,9 +32,12 @@ class faultyDetails extends Component {
   }
 
   render() {
+    console.log("PRRROOOOPS: ", this.props);
+    const { user } = this.props;
+    const { ticketId } = this.props.match.params;
     return (
       <React.Fragment>
-        <h1>This is a faulty details #{this.props.match.params.id}</h1>
+        <h1>This is a ticket details #{ticketId}</h1>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -61,22 +65,42 @@ class faultyDetails extends Component {
               <th scope="col">Comment</th>
               <th scope="col">Status</th>
               <th scope="col">Processed</th>
+              {user.isAdmin && <th scope="col"></th>}
             </tr>
           </thead>
           <tbody>
             {this.state.replacement.map(r => (
-              <tr key={r.id}>
+              <tr key={r.replacementId}>
                 <td>{r.model}</td>
-                <td>{r.serialNumber}</td>
+                <td>{r.newSerialNumber}</td>
                 <td>{r.carrier}</td>
                 <td>{r.trackingNumber}</td>
                 <td>{r.comment}</td>
                 <td>{r.status}</td>
                 <td>{r.processed}</td>
+                {user.isAdmin && (
+                  <td>
+                    <Link
+                      to={`/ticket/${ticketId}/replacement/${r.replacementId}`}
+                      className="btn btn-primary"
+                    >
+                      Update
+                    </Link>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
         </table>
+
+        {this.state.replacement.length === 0 && user.isAdmin && (
+          <Link
+            to={`/ticket/${ticketId}/replacement/new`}
+            className="btn btn-primary"
+          >
+            Add Replacement Unit
+          </Link>
+        )}
       </React.Fragment>
     );
   }
