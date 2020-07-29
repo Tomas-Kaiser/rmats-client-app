@@ -44,17 +44,17 @@ class ReplacementForm extends Form {
   };
 
   async populateReplacementUnit() {
+    const { replacementId } = this.props.match.params;
+    const { user } = this.props;
+
+    // If we need add a new unit do not fill out the form otherwise refill the form with actual data
     try {
-      console.log("PROPS: ", this.props);
-      const replacementId = this.props.match.params.replacementId;
-      console.log("replacement id: ", replacementId);
       if (replacementId === "new") return;
 
       const { data: replacementUnit } = await getReplacementUnitById(
-        this.props.user,
+        user,
         replacementId
       );
-      console.log("Data: ", replacementUnit);
       this.setState({ data: this.mapToViewModel(replacementUnit) });
     } catch (error) {
       console.log(error);
@@ -77,28 +77,18 @@ class ReplacementForm extends Form {
   }
 
   doSubmit = async () => {
+    const { ticketId, replacementId } = this.props.match.params;
+    const { data } = this.state;
+    const { user } = this.props;
     // If new unit otherwise update the replacement unit
-    if (this.props.match.params.replacementId === "new") {
-      console.log("Submitting: ", this.props);
+    if (replacementId === "new") {
       try {
-        const { data } = await saveReplacementUnit(
-          this.props.user,
-          this.state.data,
-          this.props.match.params.ticketId
-        );
-        console.log("Saved: ", data);
-      } catch (error) {
-        console.log(error);
-      }
+        await saveReplacementUnit(user, data, ticketId);
+      } catch (error) {}
       window.location = "/admin/tickets";
     } else {
       try {
-        await updateReplacementUnit(
-          this.props.user,
-          this.state.data,
-          this.props.match.params.ticketId,
-          this.props.match.params.replacementId
-        );
+        await updateReplacementUnit(user, data, ticketId, replacementId);
 
         window.location = "/admin/tickets";
       } catch (error) {
