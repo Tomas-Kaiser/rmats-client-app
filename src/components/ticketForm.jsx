@@ -36,7 +36,7 @@ class TicketForm extends Form {
 
       // Creating a fault unit
       try {
-        const { data: faulty } = await saveFaultyUnit(user, data, ticket);
+        await saveFaultyUnit(user, data, ticket);
         window.location = "/customer/tickets";
       } catch (error) {}
     } catch (error) {}
