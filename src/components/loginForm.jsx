@@ -1,5 +1,5 @@
 import React from "react";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import { auth } from "../services/authService";
@@ -26,14 +26,15 @@ class LoginForm extends Form {
       let { data } = await auth(username, password);
       data = { ...data, pwd: password };
       localStorage.setItem("token", JSON.stringify(data));
+      window.location = "/dashboard";
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         alert("This is expected error 404");
         //return (window.location = "/customer-login");
+      } else if (ex.response && ex.response.status === 401) {
+        toast.error("Your username or password is incorrect");
       }
     }
-
-    window.location = "/dashboard";
   };
 
   render() {

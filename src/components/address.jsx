@@ -14,8 +14,6 @@ class Address extends Component {
 
     const { data: addresses } = await getAllAddresses(user);
     this.setState({ addresses });
-
-    console.log("Daaata: ", addresses);
   }
 
   handleDelete = async address => {

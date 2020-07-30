@@ -3,7 +3,7 @@ import Joi from "joi-browser";
 import Input from "./input";
 
 class Form extends Component {
-  state = { data: { whatIsThis: "Tada" }, errors: {} };
+  state = { data: {}, errors: {} };
 
   validate = () => {
     const options = { abortEarly: false };
