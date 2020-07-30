@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getTicketsByCustomer } from "../../services/ticketService";
+import { getReplacementUnitByTicketId } from "./../../services/replacementService";
 
 class CustomerTickets extends Component {
   state = {
@@ -9,8 +10,26 @@ class CustomerTickets extends Component {
 
   async componentDidMount() {
     try {
+      let updatedTickets = [];
+
       const { data: tickets } = await getTicketsByCustomer(this.props.user);
-      this.setState({ tickets });
+
+      // Adding a replacement unit into ticket based on ticket id
+      for (let ticket of tickets) {
+        try {
+          const { data: replacement } = await getReplacementUnitByTicketId(
+            this.props.user,
+            ticket.id
+          );
+          ticket = { ...ticket, replacement };
+          updatedTickets.push(ticket);
+        } catch (error) {
+          if (error.response && error.response.status === 404) {
+            alert("Something went wrong");
+          }
+        }
+      }
+      this.setState({ tickets: updatedTickets });
     } catch (error) {
       if (error.response && error.response.status === 404) {
         alert("Something went wrong");
@@ -28,6 +47,7 @@ class CustomerTickets extends Component {
               <th scope="col">Date</th>
               <th scope="col">Comment</th>
               <th scope="col"></th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -44,6 +64,10 @@ class CustomerTickets extends Component {
                     Detail
                   </Link>
                 </td>
+                {ticket.replacement.length !== 0 && (
+                  <td>{ticket.replacement[0].status}</td>
+                )}
+                {ticket.replacement.length === 0 && <td>TBD</td>}
               </tr>
             ))}
           </tbody>
