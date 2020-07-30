@@ -65,7 +65,12 @@ class CustomerTickets extends Component {
                   </Link>
                 </td>
                 {ticket.replacement.length !== 0 && (
-                  <td>{ticket.replacement[0].status}</td>
+                  <td>
+                    {ticket.replacement[0].status.toLowerCase().trim() ===
+                    "delivered"
+                      ? "Closed"
+                      : "Open"}
+                  </td>
                 )}
                 {ticket.replacement.length === 0 && <td>TBD</td>}
               </tr>
