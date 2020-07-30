@@ -104,7 +104,7 @@ class CustomerTickets extends Component {
                         : "Open"}
                     </td>
                   )}
-                  {ticket.replacement.length === 0 && <td>TBD</td>}
+                  {ticket.replacement.length === 0 && <td>Open</td>}
                 </tr>
               ))}
             </tbody>
