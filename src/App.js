@@ -16,6 +16,7 @@ import AddressForm from "./components/addressForm";
 import Address from "./components/address";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import Profile from "./components/profile";
 
 class App extends Component {
   state = {
@@ -49,10 +50,18 @@ class App extends Component {
               path="/dashboard"
               render={props => {
                 if (!user) {
-                  console.log("is user?", user);
                   return <Redirect to="/login" />;
                 }
                 return <Dashboard {...props} user={user} />;
+              }}
+            />
+            <Route
+              path="/profile"
+              render={props => {
+                if (!user) {
+                  return <Redirect to="/login" />;
+                }
+                return <Profile {...props} user={user} />;
               }}
             />
             <Route

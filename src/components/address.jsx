@@ -32,12 +32,7 @@ class Address extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.addresses.length === 0 && (
-          <Link to="/customer/address/new" className="btn btn-primary">
-            Add Address
-          </Link>
-        )}
-        {this.state.addresses.length != 0 && (
+        {this.state.addresses.length !== 0 && (
           <React.Fragment>
             <ToastContainer />
             <h2 className="mt-3">Your address listed below:</h2>
@@ -68,6 +63,11 @@ class Address extends Component {
               ))}
             </div>
           </React.Fragment>
+        )}
+        {this.state.addresses.length === 0 && (
+          <Link to="/customer/address/new" className="btn btn-primary">
+            Add Address
+          </Link>
         )}
       </React.Fragment>
     );
