@@ -53,7 +53,7 @@ class TicketForm extends Form {
   render() {
     return (
       <React.Fragment>
-        <h1 className="mt-4">Ticket Form</h1>
+        <h1 className="mt-4">Create a Ticket</h1>
         <div className="container">
           <form
             onSubmit={this.handleSubmit}
