@@ -46,7 +46,9 @@ class Address extends Component {
         {addresses.length !== 0 && (
           <React.Fragment>
             <ToastContainer />
-            <h2 className="mt-3">Your address listed below:</h2>
+            <h2 className="mt-3">
+              Your address{addresses.length === 1 ? "" : "es"} listed below:
+            </h2>
             <div className="d-sm-flex mt-5">
               {addresses.map((address, index) => (
                 <div
