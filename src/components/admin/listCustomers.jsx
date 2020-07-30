@@ -34,7 +34,6 @@ class ListCustomers extends Component {
             <ul className="list-group list-group-flush">
               <li className="list-group-item">{c.email}</li>
               <li className="list-group-item">{c.phoneNumber}</li>
-              <li className="list-group-item">Vestibulum at eros</li>
             </ul>
           </div>
         ))}
