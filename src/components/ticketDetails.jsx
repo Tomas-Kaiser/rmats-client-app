@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { getFaultyUnit } from "../services/faultyService";
 import { getReplacementUnitByTicketId } from "../services/replacementService";
 import { Link } from "react-router-dom";
+import { isArrayEmpty } from "./../utils/emptyArray";
 
 class faultyDetails extends Component {
   state = {
     faulty: [],
-    replacement: []
+    replacement: [],
+    processing: false
   };
 
   async componentDidMount() {
@@ -28,6 +30,7 @@ class faultyDetails extends Component {
         match.params.ticketId
       );
       this.setState({ replacement });
+      this.setState({ processing: isArrayEmpty(replacement) });
     } catch (error) {
       if (error.response && error.response.status === 404) {
         alert("Something went wrong");
@@ -38,6 +41,7 @@ class faultyDetails extends Component {
   render() {
     const { user } = this.props;
     const { ticketId } = this.props.match.params;
+    const { replacement, processing } = this.state;
     return (
       <React.Fragment>
         <h1>This is a ticket details #{ticketId}</h1>
@@ -72,7 +76,7 @@ class faultyDetails extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.replacement.map(r => (
+            {replacement.map(r => (
               <tr key={r.replacementId}>
                 <td>{r.model}</td>
                 <td>{r.newSerialNumber}</td>
@@ -85,7 +89,7 @@ class faultyDetails extends Component {
                   <td>
                     <Link
                       to={`/ticket/${ticketId}/replacement/${r.replacementId}`}
-                      className="btn btn-primary"
+                      className="btn btn-secondary"
                     >
                       Update
                     </Link>
@@ -97,17 +101,19 @@ class faultyDetails extends Component {
         </table>
 
         {/* If there is not replacement unit yet */}
-        {this.state.replacement.length === 0 && (
+        {processing && (
           <p className="text-info text-center">There is no update yet</p>
         )}
 
-        {this.state.replacement.length === 0 && user.isAdmin && (
-          <Link
-            to={`/ticket/${ticketId}/replacement/new`}
-            className="btn btn-primary"
-          >
-            Add Replacement Unit
-          </Link>
+        {processing && user.isAdmin && (
+          <div className="text-center">
+            <Link
+              to={`/ticket/${ticketId}/replacement/new`}
+              className="btn btn-secondary"
+            >
+              Add Replacement Unit
+            </Link>
+          </div>
         )}
       </React.Fragment>
     );
