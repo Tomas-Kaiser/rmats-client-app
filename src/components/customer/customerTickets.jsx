@@ -16,7 +16,7 @@ class CustomerTickets extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1>See all tickets</h1>
+        <h1 className="mt-4">Ticket{this.state.tickets === 1 ? "" : "s"}</h1>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -33,7 +33,10 @@ class CustomerTickets extends Component {
                 <td>{ticket.raiseDate}</td>
                 <td>{ticket.comment}</td>
                 <td>
-                  <Link to={`/ticket/${ticket.id}`} className="btn btn-primary">
+                  <Link
+                    to={`/ticket/${ticket.id}`}
+                    className="btn btn-secondary"
+                  >
                     Detail
                   </Link>
                 </td>

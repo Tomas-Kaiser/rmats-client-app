@@ -29,7 +29,7 @@ class LoginForm extends Form {
       window.location = "/dashboard";
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
-        alert("This is expected error 404");
+        alert("Something went wrong");
         //return (window.location = "/customer-login");
       } else if (ex.response && ex.response.status === 401) {
         toast.error("Your username or password is incorrect");

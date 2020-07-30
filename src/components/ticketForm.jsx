@@ -38,8 +38,16 @@ class TicketForm extends Form {
       try {
         await saveFaultyUnit(user, data, ticket);
         window.location = "/customer/tickets";
-      } catch (error) {}
-    } catch (error) {}
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          alert("Something went wrong");
+        }
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        alert("Something went wrong");
+      }
+    }
   };
 
   render() {
