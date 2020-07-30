@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getAllTickets } from "../../services/ticketService";
-import { isEmpty } from "./../../utils/emptyArray";
+import { isArrayEmpty } from "./../../utils/emptyArray";
 
 class AdminTickets extends Component {
   state = {
@@ -13,7 +13,9 @@ class AdminTickets extends Component {
     const { data: tickets } = await getAllTickets(this.props.user);
     console.log("All tickets: ", tickets);
     this.setState({ tickets });
-    isEmpty(tickets);
+    this.setState({
+      processing: this.setState({ processing: isArrayEmpty(tickets) })
+    });
   }
 
   render() {

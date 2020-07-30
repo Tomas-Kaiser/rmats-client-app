@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { getAllAddresses } from "../services/addressService";
 import { deleteAddressById } from "./../services/addressService";
-import { isEmpty } from "./../utils/emptyArray";
+import { isArrayEmpty } from "./../utils/emptyArray";
 
 class Address extends Component {
   state = {
@@ -12,7 +12,7 @@ class Address extends Component {
   };
 
   // if addresses are empty then display info and btn to add address
-  isEmpty = addresses => {
+  isArrayEmpty = addresses => {
     if (addresses.length === 0) {
       this.setState({ processing: true });
     }
@@ -23,14 +23,14 @@ class Address extends Component {
 
     const { data: addresses } = await getAllAddresses(user);
     this.setState({ addresses });
-    isEmpty(addresses);
+    this.setState({ processing: isArrayEmpty(addresses) });
   }
 
   handleDelete = async address => {
     const originalAddresses = this.state.addresses;
     const addresses = originalAddresses.filter(a => a.id !== address.id);
     this.setState({ addresses });
-    this.isEmpty(addresses);
+    this.setState({ processing: isArrayEmpty(addresses) });
 
     try {
       await deleteAddressById(this.props.user, address.id);

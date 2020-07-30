@@ -1,5 +1,5 @@
-export function isEmpty(array) {
+export function isArrayEmpty(array) {
   if (array.length === 0) {
-    this.setState({ processing: true });
+    return true;
   }
 }
