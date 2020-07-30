@@ -4,19 +4,27 @@ import { getAllTickets } from "../../services/ticketService";
 
 class AdminTickets extends Component {
   state = {
-    tickets: []
+    tickets: [],
+    processing: false
+  };
+
+  isEmpty = tickets => {
+    if (tickets.length === 0) {
+      this.setState({ processing: true });
+    }
   };
 
   async componentDidMount() {
     const { data: tickets } = await getAllTickets(this.props.user);
     console.log("All tickets: ", tickets);
     this.setState({ tickets });
+    this.isEmpty(tickets);
   }
 
   render() {
     return (
       <React.Fragment>
-        <h1>See all tickets</h1>
+        <h1 className="mt-4">See all tickets</h1>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -33,7 +41,10 @@ class AdminTickets extends Component {
                 <td>{ticket.raiseDate}</td>
                 <td>{ticket.comment}</td>
                 <td>
-                  <Link to={`/ticket/${ticket.id}`} className="btn btn-primary">
+                  <Link
+                    to={`/ticket/${ticket.id}`}
+                    className="btn btn-secondary"
+                  >
                     Detail
                   </Link>
                 </td>
@@ -41,6 +52,11 @@ class AdminTickets extends Component {
             ))}
           </tbody>
         </table>
+        {this.state.processing && (
+          <p className="text-center text-info">
+            There is no ticket created yet
+          </p>
+        )}
       </React.Fragment>
     );
   }
