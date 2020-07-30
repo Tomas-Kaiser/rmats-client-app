@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { ToastContainer } from "react-toastify";
 import Joi from "joi-browser";
 import Form from "./common/form";
