@@ -37,7 +37,7 @@ class AddressForm extends Form {
       }
     }
 
-    window.location = "/dashboard";
+    window.location = "/customer/address";
   };
   render() {
     return (
