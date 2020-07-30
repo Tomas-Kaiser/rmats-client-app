@@ -57,12 +57,12 @@ class CustomerDashboard extends Component {
             <div className="col-sm-6">
               <div className="card ">
                 <div className="card-body">
-                  <h5 className="card-title">Your Address</h5>
+                  <h5 className="card-title">Your Addresses</h5>
                   <p className="card-text">
-                    You can check your current address.
+                    You can check your current addresses.
                   </p>
                   <Link to="/customer/address" className="btn btn-secondary">
-                    Your Address
+                    Your Addresses
                   </Link>
                 </div>
               </div>
