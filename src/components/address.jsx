@@ -10,10 +10,10 @@ class Address extends Component {
     processing: false
   };
 
+  // if addresses are empty then display info and btn to add address
   isEmpty = addresses => {
     if (addresses.length === 0) {
       this.setState({ processing: true });
-      console.log(this.state.processing);
     }
   };
 
@@ -40,15 +40,15 @@ class Address extends Component {
   };
 
   render() {
-    console.log("Processing? ", this.state.processing);
+    const { addresses, processing } = this.state;
     return (
       <React.Fragment>
-        {this.state.addresses.length !== 0 && (
+        {addresses.length !== 0 && (
           <React.Fragment>
             <ToastContainer />
             <h2 className="mt-3">Your address listed below:</h2>
             <div className="d-sm-flex mt-5">
-              {this.state.addresses.map((address, index) => (
+              {addresses.map((address, index) => (
                 <div
                   key={address.id}
                   className="card mb-5 mr-4"
@@ -75,7 +75,7 @@ class Address extends Component {
             </div>
           </React.Fragment>
         )}
-        {this.state.processing && (
+        {processing && (
           <div className="container text-center mt-4">
             <p className="text-info">No address added yet.</p>
             <Link to="/customer/address/new" className="btn btn-secondary">
