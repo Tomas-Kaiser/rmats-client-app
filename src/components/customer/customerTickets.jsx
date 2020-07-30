@@ -51,12 +51,17 @@ class CustomerTickets extends Component {
 
     const filtered =
       selectedStatus && !(selectedStatus === "All Tickets")
-        ? this.state.tickets.filter(
-            t =>
-              (t.replacement[0].status.toLowerCase().trim() === "delivered"
-                ? "Closed"
-                : "Open") === selectedStatus
-          )
+        ? this.state.tickets.filter(t => {
+            if (t.replacement.length === 0) {
+              return "Open" === selectedStatus;
+            } else {
+              return (
+                (t.replacement[0].status.toLowerCase().trim() === "delivered"
+                  ? "Closed"
+                  : "Open") === selectedStatus
+              );
+            }
+          })
         : this.state.tickets;
 
     console.log("Filteeeer: ", filtered);
