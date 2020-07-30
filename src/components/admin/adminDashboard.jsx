@@ -24,10 +24,7 @@ class AdminDashboard extends Component {
               <div className="card ">
                 <div className="card-body">
                   <h5 className="card-title">View all registered customers</h5>
-                  <Link
-                    to="/customer/address/new"
-                    className="btn btn-secondary"
-                  >
+                  <Link to="/admin/customers" className="btn btn-secondary">
                     View Customers
                   </Link>
                 </div>
