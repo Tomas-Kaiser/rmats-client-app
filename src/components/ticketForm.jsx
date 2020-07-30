@@ -44,15 +44,21 @@ class TicketForm extends Form {
 
   render() {
     return (
-      <div>
-        <h1>Ticket Form</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("model", "Fault unit (model)")}
-          {this.renderInput("serialNumber", "Serial Number")}
-          {this.renderInput("custComment", "Comment")}
-          {this.renderButton("Submit")}
-        </form>
-      </div>
+      <React.Fragment>
+        <h1 className="mt-4">Ticket Form</h1>
+        <div className="container">
+          <form
+            onSubmit={this.handleSubmit}
+            style={{ width: "18rem" }}
+            className="m-auto"
+          >
+            {this.renderInput("model", "Fault unit (model)")}
+            {this.renderInput("serialNumber", "Serial Number")}
+            {this.renderInput("custComment", "Comment")}
+            <div className="text-center">{this.renderButton("Submit")}</div>
+          </form>
+        </div>
+      </React.Fragment>
     );
   }
 }
