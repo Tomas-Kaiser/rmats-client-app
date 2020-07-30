@@ -41,17 +41,23 @@ class AddressForm extends Form {
   };
   render() {
     return (
-      <div>
+      <React.Fragment>
         <ToastContainer />
-        <h1>Address Form</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("street", "Street")}
-          {this.renderInput("zipCode", "Zipe Code")}
-          {this.renderInput("city", "City")}
-          {this.renderInput("country", "Country")}
-          {this.renderButton("save")}
-        </form>
-      </div>
+        <h1 className="mt-4">Add an address</h1>
+        <div className="container">
+          <form
+            onSubmit={this.handleSubmit}
+            style={{ width: "18rem" }}
+            className="m-auto"
+          >
+            {this.renderInput("street", "Street")}
+            {this.renderInput("zipCode", "Zipe Code")}
+            {this.renderInput("city", "City")}
+            {this.renderInput("country", "Country")}
+            <div className="text-center">{this.renderButton("Save")}</div>
+          </form>
+        </div>
+      </React.Fragment>
     );
   }
 }
