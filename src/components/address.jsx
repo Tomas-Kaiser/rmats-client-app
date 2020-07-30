@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { getAllAddresses } from "../services/addressService";
 import { deleteAddressById } from "./../services/addressService";
+import { isEmpty } from "./../utils/emptyArray";
 
 class Address extends Component {
   state = {
@@ -22,7 +23,7 @@ class Address extends Component {
 
     const { data: addresses } = await getAllAddresses(user);
     this.setState({ addresses });
-    this.isEmpty(addresses);
+    isEmpty(addresses);
   }
 
   handleDelete = async address => {

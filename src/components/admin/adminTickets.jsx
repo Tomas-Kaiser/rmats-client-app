@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getAllTickets } from "../../services/ticketService";
+import { isEmpty } from "./../../utils/emptyArray";
 
 class AdminTickets extends Component {
   state = {
@@ -8,17 +9,11 @@ class AdminTickets extends Component {
     processing: false
   };
 
-  isEmpty = tickets => {
-    if (tickets.length === 0) {
-      this.setState({ processing: true });
-    }
-  };
-
   async componentDidMount() {
     const { data: tickets } = await getAllTickets(this.props.user);
     console.log("All tickets: ", tickets);
     this.setState({ tickets });
-    this.isEmpty(tickets);
+    isEmpty(tickets);
   }
 
   render() {
