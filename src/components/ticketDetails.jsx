@@ -16,7 +16,9 @@ class faultyDetails extends Component {
       const { data: faulty } = await getFaultyUnit(user, match.params.ticketId);
       this.setState({ faulty });
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 404) {
+        alert("Something went wrong");
+      }
     }
 
     // Getting the information about the replacement unit
@@ -27,12 +29,13 @@ class faultyDetails extends Component {
       );
       this.setState({ replacement });
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 404) {
+        alert("Something went wrong");
+      }
     }
   }
 
   render() {
-    console.log("PRRROOOOPS: ", this.props);
     const { user } = this.props;
     const { ticketId } = this.props.match.params;
     return (
@@ -92,6 +95,11 @@ class faultyDetails extends Component {
             ))}
           </tbody>
         </table>
+
+        {/* If there is not replacement unit yet */}
+        {this.state.replacement.length === 0 && (
+          <p className="text-info text-center">There is no update yet</p>
+        )}
 
         {this.state.replacement.length === 0 && user.isAdmin && (
           <Link
