@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CustomerDashboard from "./customer/customerDashboard";
+import AdminDashboard from "./admin/adminDashboard";
 
 class Dashboard extends Component {
   state = {};
@@ -17,8 +18,7 @@ class Dashboard extends Component {
         {/* Admin dashboard */}
         {user.isAdmin && (
           <React.Fragment>
-            <h2>Hello {user.firstName} | admin</h2>
-            <h3>Some data about your account:</h3>
+            <AdminDashboard user={user} />
           </React.Fragment>
         )}
       </React.Fragment>
