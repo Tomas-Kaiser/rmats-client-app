@@ -11,7 +11,11 @@ class CustomerTickets extends Component {
     try {
       const { data: tickets } = await getTicketsByCustomer(this.props.user);
       this.setState({ tickets });
-    } catch (error) {}
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        alert("Something went wrong");
+      }
+    }
   }
   render() {
     return (
