@@ -26,17 +26,19 @@ class ListCustomers extends Component {
       <React.Fragment>
         <ToastContainer />
         <h2 className="mt-2 mb-4">All customers Listed:</h2>
-        {this.state.customers.map(c => (
-          <div className="card mb-5" style={{ width: "18rem" }}>
-            <div className="card-header">
-              {c.firstName} {c.lastName}
+        <div className="d-flex">
+          {this.state.customers.map(c => (
+            <div className="card mr-3 mb-5" style={{ width: "18rem" }}>
+              <div className="card-header">
+                {c.firstName} {c.lastName}
+              </div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">{c.email}</li>
+                <li className="list-group-item">{c.phoneNumber}</li>
+              </ul>
             </div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">{c.email}</li>
-              <li className="list-group-item">{c.phoneNumber}</li>
-            </ul>
-          </div>
-        ))}
+          ))}
+        </div>
       </React.Fragment>
     );
   }
