@@ -41,6 +41,15 @@ class CustomerTickets extends Component {
             ))}
           </tbody>
         </table>
+
+        {this.state.tickets.length === 0 && (
+          <div className="container text-center">
+            <p className="text-info">No tickets created yet.</p>
+            <Link to="/customer/ticket/new" className="btn btn-secondary">
+              Create Ticket
+            </Link>
+          </div>
+        )}
       </React.Fragment>
     );
   }

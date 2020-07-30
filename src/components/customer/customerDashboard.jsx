@@ -28,9 +28,9 @@ class CustomerDashboard extends Component {
             <div className="col-sm-6">
               <div className="card ">
                 <div className="card-body">
-                  <h5 className="card-title">More delivery address?</h5>
+                  <h5 className="card-title">New delivery address?</h5>
                   <p className="card-text">
-                    Do not worry, you can add your current address here.
+                    Do not worry, you can add your new address here.
                   </p>
                   <Link
                     to="/customer/address/new"

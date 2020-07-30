@@ -6,7 +6,15 @@ import { deleteAddressById } from "./../services/addressService";
 
 class Address extends Component {
   state = {
-    addresses: []
+    addresses: [],
+    processing: false
+  };
+
+  isEmpty = addresses => {
+    if (addresses.length === 0) {
+      this.setState({ processing: true });
+      console.log(this.state.processing);
+    }
   };
 
   async componentDidMount() {
@@ -14,12 +22,14 @@ class Address extends Component {
 
     const { data: addresses } = await getAllAddresses(user);
     this.setState({ addresses });
+    this.isEmpty(addresses);
   }
 
   handleDelete = async address => {
     const originalAddresses = this.state.addresses;
     const addresses = originalAddresses.filter(a => a.id !== address.id);
     this.setState({ addresses });
+    this.isEmpty(addresses);
 
     try {
       await deleteAddressById(this.props.user, address.id);
@@ -30,6 +40,7 @@ class Address extends Component {
   };
 
   render() {
+    console.log("Processing? ", this.state.processing);
     return (
       <React.Fragment>
         {this.state.addresses.length !== 0 && (
@@ -64,10 +75,13 @@ class Address extends Component {
             </div>
           </React.Fragment>
         )}
-        {this.state.addresses.length === 0 && (
-          <Link to="/customer/address/new" className="btn btn-primary">
-            Add Address
-          </Link>
+        {this.state.processing && (
+          <div className="container text-center mt-4">
+            <p className="text-info">No address added yet.</p>
+            <Link to="/customer/address/new" className="btn btn-secondary">
+              Add Address
+            </Link>
+          </div>
         )}
       </React.Fragment>
     );
