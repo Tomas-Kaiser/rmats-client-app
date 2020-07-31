@@ -7,9 +7,7 @@ class Home extends Component {
     return (
       <React.Fragment>
         <div className="jumbotron mt-5">
-          <h1 className="display-4">
-            Welcome to our service RMA Ticket System
-          </h1>
+          <h1 className="display-4">Welcome to our RMA Ticket System</h1>
           <p className="lead">This is your helper to manage your RMA easily!</p>
           <hr className="my-4" />
           <p className="lead">
