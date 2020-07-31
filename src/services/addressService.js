@@ -9,7 +9,7 @@ export function saveAddress(customer, data) {
   const token = getToken(email, password);
 
   http.post(
-    `${apiEndpoint}s/${customerId}/address`,
+    `${apiEndpoint}/${customerId}/address`,
     {
       street: data.street,
       zipCode: data.zipCode,
@@ -28,7 +28,18 @@ export function getAllAddresses(customer) {
   const { id: customerId, email, pwd: password } = customer;
   const token = getToken(email, password);
 
-  return http.get(`${apiEndpoint}s/${customerId}/address`, {
+  return http.get(`${apiEndpoint}/${customerId}/address`, {
+    headers: {
+      Authorization: `Basic ${token}`
+    }
+  });
+}
+
+export function getAllAddressesByCustomerId(admin, customerId) {
+  const { email, pwd: password } = admin;
+  const token = getToken(email, password);
+
+  return http.get(`${apiEndpoint}/${customerId}/address`, {
     headers: {
       Authorization: `Basic ${token}`
     }
@@ -39,7 +50,7 @@ export function deleteAddressById(customer, addressId) {
   const { id: customerId, email, pwd: password } = customer;
   const token = getToken(email, password);
 
-  return http.delete(`${apiEndpoint}s/${customerId}/address/${addressId}`, {
+  return http.delete(`${apiEndpoint}/${customerId}/address/${addressId}`, {
     headers: {
       Authorization: `Basic ${token}`
     }

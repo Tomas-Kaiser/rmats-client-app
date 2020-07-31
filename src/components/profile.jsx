@@ -7,8 +7,8 @@ class Profile extends Component {
     const { user } = this.props;
     return (
       <React.Fragment>
-        <h1 className="mt-2">Profile</h1>
-        <div className="card mt-3" style={{ width: "25rem" }}>
+        <h2 className="mt-2">Profile</h2>
+        <div className="card mt-3" style={{ width: "13rem" }}>
           <div className="card-header">
             {user.firstName} {user.lastName}
           </div>

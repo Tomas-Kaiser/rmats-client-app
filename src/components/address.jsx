@@ -20,6 +20,7 @@ class Address extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
+    console.log("Address user:", user);
 
     const { data: addresses } = await getAllAddresses(user);
     this.setState({ addresses });
