@@ -38,7 +38,6 @@ class App extends Component {
 
   render() {
     const { user } = this.state;
-    console.log(user);
 
     return (
       <React.Fragment>

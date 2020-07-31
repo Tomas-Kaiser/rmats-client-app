@@ -25,3 +25,14 @@ export function getAllCustomers(admin) {
     }
   });
 }
+
+export function getCustomerById(admin, customerId) {
+  const { email, pwd: password } = admin;
+  const token = getToken(email, password);
+
+  return http.get(`${apiUrl}/customer/${customerId}`, {
+    headers: {
+      Authorization: `Basic ${token}`
+    }
+  });
+}
