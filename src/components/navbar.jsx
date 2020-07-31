@@ -36,7 +36,7 @@ const Navbar = ({ user }) => {
               Create Ticket
             </NavLink>
             <NavLink className="nav-item nav-link" to="/customer/tickets">
-              See Tickets
+              Review Tickets
             </NavLink>
           </React.Fragment>
         )}
@@ -45,7 +45,7 @@ const Navbar = ({ user }) => {
         {user && user.isAdmin && (
           <React.Fragment>
             <NavLink className="nav-item nav-link" to="/admin/tickets">
-              See Tickets
+              Review Tickets
             </NavLink>
             <NavLink className="nav-item nav-link" to="/admin/customers">
               Customers
