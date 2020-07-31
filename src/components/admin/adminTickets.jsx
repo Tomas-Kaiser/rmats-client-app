@@ -35,7 +35,6 @@ class AdminTickets extends Component {
       }
       console.log("updatedTickets", updatedTickets);
       this.setState({ tickets: updatedTickets });
-
       this.setState({
         processing: this.setState({ processing: isArrayEmpty(tickets) })
       });
@@ -44,11 +43,6 @@ class AdminTickets extends Component {
         alert("Something went wrong");
       }
     }
-
-    /*
-    const { data: tickets } = await getAllTickets(this.props.user);
-    this.setState({ tickets });
-*/
   }
 
   handleStatusSelect = status => {
@@ -57,6 +51,7 @@ class AdminTickets extends Component {
 
   render() {
     const { selectedStatus } = this.state;
+    console.log("user id???", this.state.tickets);
 
     let filtered;
     try {
@@ -98,6 +93,7 @@ class AdminTickets extends Component {
                 <th scope="col">Ticket Id</th>
                 <th scope="col">Date</th>
                 <th scope="col">Customer Comment</th>
+                <th scope="col">Ship To Information</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -107,6 +103,14 @@ class AdminTickets extends Component {
                   <th scope="row">{ticket.id}</th>
                   <td>{ticket.raiseDate}</td>
                   <td>{ticket.comment}</td>
+                  <td>
+                    <Link
+                      to={`/admin/ship-to-info/${ticket.userId}`}
+                      className="btn btn-secondary"
+                    >
+                      Ship To
+                    </Link>
+                  </td>
                   <td>
                     <Link
                       to={`/ticket/${ticket.id}`}

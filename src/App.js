@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Profile from "./components/profile";
 import ListCustomers from "./components/admin/listCustomers";
+import ShipToInfo from "./components/shipToInfo";
 
 class App extends Component {
   state = {
@@ -118,6 +119,15 @@ class App extends Component {
                   return <Redirect to="/login" />;
                 }
                 return <ListCustomers {...props} user={user} />;
+              }}
+            />
+            <Route
+              path="/admin/ship-to-info/:id"
+              render={props => {
+                if (!user || !user.isAdmin) {
+                  return <Redirect to="/login" />;
+                }
+                return <ShipToInfo {...props} user={user} />;
               }}
             />
             <Route
