@@ -11,16 +11,8 @@ class Address extends Component {
     processing: false
   };
 
-  // if addresses are empty then display info and btn to add address
-  isArrayEmpty = addresses => {
-    if (addresses.length === 0) {
-      this.setState({ processing: true });
-    }
-  };
-
   async componentDidMount() {
     const { user } = this.props;
-    console.log("Address user:", user);
 
     const { data: addresses } = await getAllAddresses(user);
     this.setState({ addresses });

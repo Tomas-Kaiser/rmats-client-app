@@ -57,7 +57,7 @@ class RegistrationForm extends Form {
   render() {
     return (
       <div>
-        <h1>Registration Form</h1>
+        <h1 className="mt-2 mb-4 text-center">Registration Form</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("firstName", "First Name")}
           {this.renderInput("lastName", "Last Name")}
@@ -65,7 +65,7 @@ class RegistrationForm extends Form {
           {this.renderInput("company", "Company Name")}
           {this.renderInput("email", "Email", "email")}
           {this.renderInput("password", "Password", "password")}
-          {this.renderButton("Register")}
+          <div className="text-center">{this.renderButton("Register")}</div>
         </form>
       </div>
     );

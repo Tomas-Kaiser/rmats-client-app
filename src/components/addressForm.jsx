@@ -43,7 +43,7 @@ class AddressForm extends Form {
     return (
       <React.Fragment>
         <ToastContainer />
-        <h1 className="mt-4">Add an address</h1>
+        <h1 className="mt-2 mb-4 text-center">Add an address</h1>
         <div className="container">
           <form
             onSubmit={this.handleSubmit}

@@ -39,15 +39,15 @@ class LoginForm extends Form {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <ToastContainer />
-        <h1>Login Form</h1>
+        <h1 className="mt-2 mb-4 text-center">Login Form</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
-          {this.renderButton("login")}
+          <div className="text-center">{this.renderButton("login")}</div>
         </form>
-      </div>
+      </React.Fragment>
     );
   }
 }

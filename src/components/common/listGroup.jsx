@@ -6,7 +6,7 @@ const ListGroup = props => {
   console.log("Items", items);
 
   return (
-    <ul className="list-group mt-5">
+    <ul className="list-group mt-5" style={{ cursor: "pointer" }}>
       {items.map((item, index) => (
         <li
           onClick={() => onItemSelect(item)}

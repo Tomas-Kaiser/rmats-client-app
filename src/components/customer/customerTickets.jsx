@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import ListGroup from "../common/listGroup";
 import { getTicketsByCustomer } from "../../services/ticketService";
 import { getReplacementUnitByTicketId } from "./../../services/replacementService";
+import { isArrayEmpty } from "./../../utils/emptyArray";
 
 class CustomerTickets extends Component {
   state = {
     tickets: [],
-    status: ["All Tickets", "Open", "Closed"]
+    status: ["All Tickets", "Open", "Closed"],
+    processing: false
   };
 
   async componentDidMount() {
@@ -16,7 +18,7 @@ class CustomerTickets extends Component {
 
       const { data: tickets } = await getTicketsByCustomer(this.props.user);
 
-      // Adding a replacement unit into ticket based on ticket id
+      // Assign a replacement unit into ticket based on ticket id
       for (let ticket of tickets) {
         try {
           const { data: replacement } = await getReplacementUnitByTicketId(
@@ -32,7 +34,10 @@ class CustomerTickets extends Component {
         }
       }
       console.log("updatedTickets", updatedTickets);
-      this.setState({ tickets: updatedTickets });
+      this.setState({
+        tickets: updatedTickets,
+        processing: isArrayEmpty(updatedTickets)
+      });
     } catch (error) {
       if (error.response && error.response.status === 404) {
         alert("Something went wrong");
@@ -46,8 +51,6 @@ class CustomerTickets extends Component {
 
   render() {
     const { selectedStatus } = this.state;
-
-    console.log("selected STAATUS: ", selectedStatus);
 
     const filtered =
       selectedStatus && !(selectedStatus === "All Tickets")
@@ -63,8 +66,6 @@ class CustomerTickets extends Component {
             }
           })
         : this.state.tickets;
-
-    console.log("Filteeeer: ", filtered);
 
     return (
       <div className="row">
@@ -88,6 +89,7 @@ class CustomerTickets extends Component {
               </tr>
             </thead>
             <tbody>
+              {/* Listed all or filtered tickets assign to the customer */}
               {filtered.map(ticket => (
                 <tr key={ticket.id}>
                   <th scope="row">{ticket.id}</th>
@@ -114,7 +116,8 @@ class CustomerTickets extends Component {
               ))}
             </tbody>
           </table>
-          {this.state.tickets.length === 0 && (
+          {/* If no tickets yet, display the below message */}
+          {this.state.processing && (
             <div className="container text-center">
               <p className="text-info">No tickets created yet.</p>
               <Link to="/customer/ticket/new" className="btn btn-secondary">

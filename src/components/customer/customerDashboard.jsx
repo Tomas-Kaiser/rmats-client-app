@@ -7,8 +7,7 @@ class CustomerDashboard extends Component {
     const { user } = this.props;
     return (
       <React.Fragment>
-        <h2>Hello {user.firstName} | customer</h2>
-        <h3>Some data about your account:</h3>
+        <h2 className="mt-2 mb-4">Hello {user.firstName} | customer</h2>
 
         <div className="container">
           <div className="row mt-5 mb-5">
