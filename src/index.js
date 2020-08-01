@@ -6,6 +6,8 @@ import App from "./App";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
+console.log("SUPERNAME", process.env.REACT_APP_NAME);
+
 ReactDOM.render(
   <BrowserRouter>
     <App />
