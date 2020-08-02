@@ -30,11 +30,12 @@ class LoginForm extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         alert("Something went wrong");
-        console.log("ex", ex);
+
         //return (window.location = "/customer-login");
       } else if (ex.response && ex.response.status === 401) {
         toast.error("Your username or password is incorrect");
       }
+      console.log("ERRROR HERE: ", ex);
     }
   };
 

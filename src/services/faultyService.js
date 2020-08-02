@@ -1,5 +1,4 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
 import { getToken } from "./authService";
 
 const apiEndpoint = "/customer";
@@ -27,7 +26,7 @@ export function getFaultyUnit(customer, ticketId) {
   const { email, pwd: password } = customer;
   const token = getToken(email, password);
 
-  return http.get(`${apiUrl}/tickets/${ticketId}/faulty`, {
+  return http.get(`/tickets/${ticketId}/faulty`, {
     headers: {
       Authorization: `Basic ${token}`
     }

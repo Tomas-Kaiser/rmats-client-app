@@ -1,5 +1,4 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
 import { getToken } from "./authService";
 
 export function saveReplacementUnit(admin, data, ticketId) {
@@ -7,7 +6,7 @@ export function saveReplacementUnit(admin, data, ticketId) {
   const token = getToken(email, password);
 
   return http.post(
-    `${apiUrl}/admin/replacement`,
+    `/admin/replacement`,
     {
       ticketId: ticketId,
       carrier: data.carrier,
@@ -30,7 +29,7 @@ export function updateReplacementUnit(admin, data, ticketId, replacementId) {
   const token = getToken(email, password);
 
   return http.put(
-    `${apiUrl}/admin/${replacementId}/replacement`,
+    `/admin/${replacementId}/replacement`,
     {
       ticketId: ticketId,
       carrier: data.carrier,
@@ -52,7 +51,7 @@ export function getReplacementUnitByTicketId(customer, ticketId) {
   const { email, pwd: password } = customer;
   const token = getToken(email, password);
 
-  return http.get(`${apiUrl}/${ticketId}/replacements`, {
+  return http.get(`/${ticketId}/replacements`, {
     headers: {
       Authorization: `Basic ${token}`
     }
@@ -63,7 +62,7 @@ export function getReplacementUnitById(customer, replacementId) {
   const { email, pwd: password } = customer;
   const token = getToken(email, password);
 
-  return http.get(`${apiUrl}/replacements/${replacementId}`, {
+  return http.get(`/replacements/${replacementId}`, {
     headers: {
       Authorization: `Basic ${token}`
     }
