@@ -6,7 +6,6 @@ install: npm install
 
 scirpt:
   - npm test
-  - npm run build
 
 deploy:
   provider: heroku
