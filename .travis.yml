@@ -4,7 +4,13 @@ cache: npm
 
 install: npm install
 
+scirpt:
+  - npm test
+  - npm run build
+
 deploy:
   provider: heroku
+  app: rmats-spa
+  api_key: 71ccb954-77ec-441b-a0fc-42dc54cb53ee
   on:
     branch: master
