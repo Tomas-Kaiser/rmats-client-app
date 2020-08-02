@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, MemoryRouter } from "react-router-dom";
 import LoginForm from "./components/loginForm";
 import Home from "./components/home";
 import Dashboard from "./components/dashboard";
@@ -41,7 +41,9 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <Navbar user={user} />
+        <MemoryRouter>
+          <Navbar user={user} />
+        </MemoryRouter>
         <main className="container">
           <Switch>
             <Route path="/login" component={LoginForm}></Route>
