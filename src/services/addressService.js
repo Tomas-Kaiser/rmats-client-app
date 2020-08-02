@@ -1,8 +1,7 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
 import { getToken } from "./authService";
 
-const apiEndpoint = apiUrl + "/customer";
+const apiEndpoint = "/customer";
 
 export function saveAddress(customer, data) {
   const { id: customerId, email, pwd: password } = customer;

@@ -1,8 +1,7 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
 import { getToken } from "./authService";
 
-const apiEndpoint = apiUrl + "/customer";
+const apiEndpoint = "/customer";
 
 export function saveTicket(customer, data) {
   const { id, email, pwd: password } = customer;
@@ -25,7 +24,7 @@ export function getTicketsByCustomer(customer) {
   const { id: customerId, email, pwd: password } = customer;
   const token = getToken(email, password);
 
-  return http.get(`${apiUrl}/${customerId}/tickets`, {
+  return http.get(`/${customerId}/tickets`, {
     headers: {
       Authorization: `Basic ${token}`
     }
@@ -36,7 +35,7 @@ export function getAllTickets(admin) {
   const { email, pwd: password } = admin;
   const token = getToken(email, password);
 
-  return http.get(`${apiUrl}/tickets`, {
+  return http.get(`/tickets`, {
     headers: {
       Authorization: `Basic ${token}`
     }

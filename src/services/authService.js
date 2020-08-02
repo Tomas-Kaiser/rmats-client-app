@@ -1,7 +1,6 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
 
-const apiEndpoint = apiUrl + "/customer/auth";
+const apiEndpoint = "/customer/auth";
 
 export function auth(username, password) {
   const token = getToken(username, password);
